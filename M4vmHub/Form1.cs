@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading.Tasks;
 
 using WeAreDevs_API;
 
@@ -19,9 +20,29 @@ namespace M4vmHub
         }
         Point lastPoint;
         
-        private void BtnInject_Click(object sender, EventArgs e)
+        private async void BtnInject_Click(object sender, EventArgs e)
         {
             api.LaunchExploit();
+
+            while (api.isAPIAttached() == false)
+            {
+                await Task.Delay(1);
+            }
+            if (api.isAPIAttached() == true)
+            {
+                await Task.Delay(3000);
+                DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\autoexec");
+                FileInfo[] TXTFiles = d.GetFiles("*.txt");
+                foreach (FileInfo file in TXTFiles)
+                {
+                    api.SendLuaScript(File.ReadAllText($"./autoexec/{file.Name}"));
+                }
+                FileInfo[] LUAFiles = d.GetFiles("*.lua");
+                foreach (FileInfo file in LUAFiles)
+                {
+                    api.SendLuaScript(File.ReadAllText($"./autoexec/{file.Name}"));
+                }
+            }
         }
 
         private void BtnExecute_Click(object sender, EventArgs e)
