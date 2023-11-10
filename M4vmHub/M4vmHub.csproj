@@ -64,6 +64,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\FastColoredTextBox.dll</HintPath>
     </Reference>
+    <Reference Include="Hovac_API">
+      <HintPath>.\Hovac_API.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

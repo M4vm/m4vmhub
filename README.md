@@ -1,8 +1,8 @@
 # m4vmhub
 
-Roblox script excecutor
+Basic Roblox script excecutor
 
-Using WRD-API:
-https://wearedevs.net/d/Exploit%20API
+Using Roblox Exploit API:
+https://github.com/game-hax/Roblox-Exploit-API
 
 Made using Visual Studio

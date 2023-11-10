@@ -6,13 +6,13 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading.Tasks;
 
-using WeAreDevs_API;
+using Hovac_API;
 
 namespace M4vmHub
 {
     public partial class Form1 : Form
     {
-        readonly ExploitAPI api = new ExploitAPI();
+        ExploitAPI exploitAPI = new ExploitAPI();
 
         public Form1()
         {
@@ -22,45 +22,25 @@ namespace M4vmHub
         
         private async void BtnInject_Click(object sender, EventArgs e)
         {
-            api.LaunchExploit();
-
-            while (api.isAPIAttached() == false)
-            {
-                await Task.Delay(1);
-            }
-            if (api.isAPIAttached() == true)
-            {
-                await Task.Delay(3000);
-                DirectoryInfo d = new DirectoryInfo(Directory.GetCurrentDirectory() + "\\autoexec");
-                FileInfo[] TXTFiles = d.GetFiles("*.txt");
-                foreach (FileInfo file in TXTFiles)
-                {
-                    api.SendLuaScript(File.ReadAllText($"./autoexec/{file.Name}"));
-                }
-                FileInfo[] LUAFiles = d.GetFiles("*.lua");
-                foreach (FileInfo file in LUAFiles)
-                {
-                    api.SendLuaScript(File.ReadAllText($"./autoexec/{file.Name}"));
-                }
-            }
+            exploitAPI.LaunchExploit();
         }
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
             string script = inputScript1.Text;
-            api.SendLuaScript(script);
+            exploitAPI.SendLuaScript(script);
         }
 
         private void CheckInjected()
         {
-            if (api.isAPIAttached())
-            {
-                txtIsInjected.Text = "Is Injected: true";
-            }
-            else
-            {
-                txtIsInjected.Text = "Is Injected: false";
-            }
+            //if (exploitAPI.isAPIAttached())
+            //{
+            //    txtIsInjected.Text = "Is Injected: true";
+            //}
+            //else
+            //{
+            //    txtIsInjected.Text = "Is Injected: false";
+            //}
         }
 
         private void Form1_Load(object sender, EventArgs e)
